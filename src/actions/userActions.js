@@ -3,6 +3,10 @@ const setCurrentUser = (user) => ({
   user,
 });
 
+const clearCurrentUser = () => ({
+  type: "CLEAR_CURRENT_USER",
+});
+
 export const signUp = (credentials) => {
   return (dispatch) => {
     const body = {
@@ -34,6 +38,36 @@ export const login = (credentials) => {
       body: JSON.stringify(credentials),
     })
       .then((response) => response.json())
-      .then(console.log);
+      .then((user) => dispatch(setCurrentUser(user)));
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    return fetch("http://localhost:3001/sessions/logout", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then(dispatch(clearCurrentUser()));
+  };
+};
+
+export const getCurrentUser = () => {
+  return (dispatch) => {
+    return fetch("http://localhost:3001/sessions/get_current_user", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((user) => dispatch(setCurrentUser(user)));
   };
 };
