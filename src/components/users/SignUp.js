@@ -8,24 +8,37 @@ class SignUp extends React.Component {
     password: "",
   };
 
-  // onSubmitForm = (event) => {
-  //   event.preventDefault();
-  //   this.props.signUp(this.state);
-  // };
+  onSubmitForm = (event) => {
+    event.preventDefault();
+    this.props.signUp(this.state);
+  };
 
-  onChangeInput = (event) =>
+  onChangeInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  };
 
   render() {
     return (
       <div>
         <form onSubmit={this.onSubmitForm}>
-          <label>Username:</label>
-          <input type='text' placeholder='Username...' />
-          <label>Password:</label>
-          <input type='password' placeholder='Password...' />
+          <label htmlFor='username'>Username:</label>
+          <input
+            onChange={this.onChangeInput}
+            value={this.state.username}
+            name='username'
+            type='text'
+            placeholder='Username...'
+          />
+          <label htmlFor='password'>Password:</label>
+          <input
+            onChange={this.onChangeInput}
+            value={this.state.password}
+            name='password'
+            type='password'
+            placeholder='Password...'
+          />
           <button type='submit'>Sign Up</button>
         </form>
       </div>
@@ -33,4 +46,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default connect(null, signUp)(SignUp);
+export default connect(null, { signUp })(SignUp);
