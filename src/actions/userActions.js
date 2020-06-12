@@ -10,6 +10,7 @@ export const signUp = (credentials) => {
     };
     return fetch("http://localhost:3001/api/v1/users", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -18,5 +19,21 @@ export const signUp = (credentials) => {
     })
       .then((response) => response.json())
       .then((user) => dispatch(setCurrentUser(user)));
+  };
+};
+
+export const login = (credentials) => {
+  return (dispatch) => {
+    return fetch("http://localhost:3001/sessions/login", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    })
+      .then((response) => response.json())
+      .then(console.log);
   };
 };

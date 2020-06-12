@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signUp } from "../../actions/userActions";
+import { login } from "../../actions/userActions";
 
-class SignUp extends React.Component {
+class LogIn extends React.Component {
   state = {
     username: "",
     password: "",
@@ -10,7 +10,7 @@ class SignUp extends React.Component {
 
   onSubmitForm = (event) => {
     event.preventDefault();
-    this.props.signUp(this.state);
+    this.props.login(this.state);
   };
 
   onChangeInput = (event) => {
@@ -22,7 +22,7 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <h1>Sign Up</h1>
+        <h1>Log In</h1>
         <form onSubmit={this.onSubmitForm}>
           <label htmlFor='username'>Username:</label>
           <input
@@ -40,11 +40,11 @@ class SignUp extends React.Component {
             type='password'
             placeholder='Password...'
           />
-          <button type='submit'>Sign Up</button>
+          <button type='submit'>Log In</button>
         </form>
       </div>
     );
   }
 }
 
-export default connect(null, { signUp })(SignUp);
+export default connect(null, { login })(LogIn);
